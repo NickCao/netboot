@@ -8,8 +8,11 @@ jobs:
     - uses: cachix/install-nix-action@v17
     - run: |
         nix build -vL .#hydraJobs.netboot
-    - uses: softprops/action-gh-release@v1
+    - uses: marvinpinto/action-automatic-releases@latest
       with:
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        automatic_release_tag: "latest"
+        prerelease: true
         files: |
           result/ipxe
           result/initrd
