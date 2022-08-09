@@ -12,7 +12,7 @@ jobs:
       with:
         path: result/
   deploy:
-    needs: build
+    needs: netboot
     runs-on: ubuntu-latest
     permissions:
       pages: write
