@@ -30,20 +30,17 @@
               openssh.enable = true;
             };
 
-            system.build.netboot = pkgs.symlinkJoin {
-              name = "netboot";
-              paths = [
-                build.kernel
-                build.netbootRamdisk
-                build.netbootIpxeScript
-              ];
-              postBuild = ''
-                mkdir -p $out/nix-support
-                echo "file ${kernelTarget} ${build.kernel}/${kernelTarget}" >> $out/nix-support/hydra-build-products
-                echo "file initrd ${build.netbootRamdisk}/initrd" >> $out/nix-support/hydra-build-products
-                echo "file ipxe ${build.netbootIpxeScript}/netboot.ipxe" >> $out/nix-support/hydra-build-products
-              '';
-            };
+            system.build.netboot = pkgs.runCommand "netboot" { } ''
+              mkdir -p $out/nix-support
+
+              cp -L ${build.kernel}/${kernelTarget}         $out/${kernelTarget}
+              cp -L ${build.netbootRamdisk}/initrd          $out/initrd
+              cp -L ${build.netbootIpxeScript}/netboot.ipxe $out/ipxe
+
+              echo "file ${kernelTarget} $out/${kernelTarget}" >> $out/nix-support/hydra-build-products
+              echo "file initrd $out/initrd" >> $out/nix-support/hydra-build-products
+              echo "file ipxe $out/ipxe" >> $out/nix-support/hydra-build-products
+            '';
 
             documentation.nixos.enable = false;
             system.stateVersion = "21.11";
