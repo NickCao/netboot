@@ -8,12 +8,16 @@ jobs:
     - uses: cachix/install-nix-action@v17
     - run: |
         nix build -vL .#hydraJobs.netboot
+        cp -Lr --no-preserve=all result artifact
+        sed -e "s|^kernel bzImage|kernel https://github.com/NickCao/netboot/releases/download/latest/bzImage|" \
+            -e "s|^initrd initrd|initrd https://github.com/NickCao/netboot/releases/download/latest/initrd|" \
+            -i artifact/ipxe
     - uses: marvinpinto/action-automatic-releases@latest
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
         automatic_release_tag: "latest"
         prerelease: true
         files: |
-          result/ipxe
-          result/initrd
-          result/bzImage
+          artifact/ipxe
+          artifact/initrd
+          artifact/bzImage
