@@ -39,6 +39,7 @@
             systemd.services.process-cmdline = {
               wantedBy = [ "multi-user.target" ];
               script = ''
+                export PATH=/run/current-system/sw/bin:$PATH
                 xargs -n1 -a /proc/cmdline | while read opt; do
                   if [[ $opt = sshkey=* ]]; then
                     echo "''${opt#sshkey=}" >> /run/authorized_keys
