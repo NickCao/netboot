@@ -21,7 +21,7 @@
 
             boot = {
               kernelPackages = pkgs.linuxPackages_latest;
-              kernelParams = [ "console=ttyS0" ];
+              supportedFilesystems = [ "btrfs" ];
             };
 
             networking.firewall.enable = false;
