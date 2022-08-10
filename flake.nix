@@ -56,6 +56,8 @@
               echo "file ipxe $out/ipxe" >> $out/nix-support/hydra-build-products
             '';
 
+            environment.noXlibs = true;
+            programs.command-not-found.enable = false;
             documentation.nixos.enable = false;
             system.stateVersion = "21.11";
           })
