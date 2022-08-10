@@ -57,10 +57,6 @@
               cp -L ${build.kernel}/${kernelTarget}         $out/${kernelTarget}
               cp -L ${build.netbootRamdisk}/initrd          $out/initrd
               cp -L ${build.netbootIpxeScript}/netboot.ipxe $out/ipxe
-
-              echo "file ${kernelTarget} $out/${kernelTarget}" >> $out/nix-support/hydra-build-products
-              echo "file initrd $out/initrd" >> $out/nix-support/hydra-build-products
-              echo "file ipxe $out/ipxe" >> $out/nix-support/hydra-build-products
             '';
 
             system.stateVersion = "21.11";
