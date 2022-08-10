@@ -14,6 +14,7 @@
           in
           {
             imports = [
+              (modulesPath + "/profiles/minimal.nix")
               (modulesPath + "/profiles/qemu-guest.nix")
               (modulesPath + "/installer/netboot/netboot.nix")
             ];
@@ -56,9 +57,6 @@
               echo "file ipxe $out/ipxe" >> $out/nix-support/hydra-build-products
             '';
 
-            environment.noXlibs = true;
-            programs.command-not-found.enable = false;
-            documentation.nixos.enable = false;
             system.stateVersion = "21.11";
           })
       ];
