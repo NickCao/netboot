@@ -52,11 +52,9 @@
             };
 
             system.build.netboot = pkgs.runCommand "netboot" { } ''
-              mkdir -p $out/nix-support
-
-              cp -L ${build.kernel}/${kernelTarget}         $out/${kernelTarget}
-              cp -L ${build.netbootRamdisk}/initrd          $out/initrd
-              cp -L ${build.netbootIpxeScript}/netboot.ipxe $out/ipxe
+              ln -s ${build.kernel}/${kernelTarget}         $out/${kernelTarget}
+              ln -s ${build.netbootRamdisk}/initrd          $out/initrd
+              ln -s ${build.netbootIpxeScript}/netboot.ipxe $out/ipxe
             '';
 
             system.stateVersion = "21.11";
