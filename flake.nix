@@ -24,6 +24,7 @@
               supportedFilesystems = [ "btrfs" ];
             };
 
+            networking.useNetworkd = true;
             networking.firewall.enable = false;
 
             services = {
