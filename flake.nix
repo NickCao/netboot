@@ -27,7 +27,21 @@
 
             services = {
               udisks2.enable = false;
-              openssh.enable = true;
+              openssh = {
+                enable = true;
+                authorizedKeysFiles = [ "/run/authorized_keys" ];
+              };
+              getty.autologinUser = "root";
+            };
+
+            systemd.services.update-sshkeys = {
+              wantedBy = [ "multi-user.target" ];
+              script = ''
+                xargs -n1 -a /proc/cmdline | while read opt; do
+                  [[ $opt = sshkey=* ]] || continue
+                  echo "''${opt#sshkey=}" >> /run/authorized_keys
+                done
+              '';
             };
 
             system.build.netboot = pkgs.runCommand "netboot" { } ''
