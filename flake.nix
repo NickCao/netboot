@@ -36,12 +36,16 @@
               getty.autologinUser = "root";
             };
 
-            systemd.services.update-sshkeys = {
+            systemd.services.process-cmdline = {
               wantedBy = [ "multi-user.target" ];
               script = ''
                 xargs -n1 -a /proc/cmdline | while read opt; do
-                  [[ $opt = sshkey=* ]] || continue
-                  echo "''${opt#sshkey=}" >> /run/authorized_keys
+                  if [[ $opt = sshkey=* ]]; then
+                    echo "''${opt#sshkey=}" >> /run/authorized_keys
+                  fi
+                  if [[ $opt = script=* ]]; then
+                    curl -L "''${opt#script=}" | ${pkgs.runtimeShell}
+                  fi
                 done
               '';
             };
