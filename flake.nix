@@ -52,6 +52,8 @@
             };
 
             system.build.netboot = pkgs.runCommand "netboot" { } ''
+              mkdir -p $out
+
               ln -s ${build.kernel}/${kernelTarget}         $out/${kernelTarget}
               ln -s ${build.netbootRamdisk}/initrd          $out/initrd
               ln -s ${build.netbootIpxeScript}/netboot.ipxe $out/ipxe
