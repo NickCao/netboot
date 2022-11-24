@@ -22,7 +22,6 @@
             boot = {
               kernelPackages = pkgs.linuxPackages_latest;
               supportedFilesystems = [ "btrfs" ];
-              initrd.systemd.enable = true;
             };
 
             networking.useNetworkd = true;
