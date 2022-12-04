@@ -36,6 +36,8 @@
               getty.autologinUser = "root";
             };
 
+            security.sudo.enable = false;
+
             systemd.services.process-cmdline = {
               wantedBy = [ "multi-user.target" ];
               script = ''
