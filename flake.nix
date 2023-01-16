@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:NickCao/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:NickCao/nixpkgs";
   };
   outputs = { self, nixpkgs, ... }: {
     hydraJobs.netboot = self.nixosConfigurations.netboot.config.system.build.netboot;
