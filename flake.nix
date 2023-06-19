@@ -40,6 +40,7 @@
 
             systemd.services.process-cmdline = {
               wantedBy = [ "multi-user.target" ];
+              after = [ "network-online.target" ];
               script = ''
                 export PATH=/run/current-system/sw/bin:$PATH
                 xargs -n1 -a /proc/cmdline | while read opt; do
