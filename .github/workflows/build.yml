@@ -1,5 +1,7 @@
 name: build
 on: [ push ]
+permissions:
+  contents: write
 jobs:
   netboot:
     runs-on: ubuntu-latest
