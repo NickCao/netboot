@@ -62,7 +62,9 @@
               ln -s ${build.netbootIpxeScript}/netboot.ipxe $out/ipxe
             '';
 
-            system.stateVersion = "21.11";
+            zramSwap.enable = true;
+
+            system.stateVersion = "23.05";
           })
       ];
     };
