@@ -21,22 +21,18 @@
 
             boot = {
               kernelPackages = pkgs.linuxPackages_latest;
-              supportedFilesystems = [ "btrfs" ];
             };
 
             networking.useNetworkd = true;
             networking.firewall.enable = false;
 
             services = {
-              udisks2.enable = false;
               openssh = {
                 enable = true;
                 authorizedKeysFiles = [ "/run/authorized_keys" ];
               };
               getty.autologinUser = "root";
             };
-
-            security.sudo.enable = false;
 
             systemd.services.process-cmdline = {
               wantedBy = [ "multi-user.target" ];
