@@ -70,6 +70,11 @@
 
               zramSwap.enable = true;
 
+              nixpkgs.flake = {
+                setNixPath = false;
+                setFlakeRegistry = false;
+              };
+
               system.stateVersion = "23.05";
             }
           )
