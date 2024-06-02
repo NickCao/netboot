@@ -1,5 +1,5 @@
 # netboot
-boot NixOS from iPXE on machines with only 1G of memory
+boot NixOS from iPXE on machines with only 700M of memory
 
 ## usage
 ```ipxe
