@@ -46,6 +46,7 @@
 
               systemd.services.process-cmdline = {
                 wantedBy = [ "multi-user.target" ];
+                wants = [ "network-online.target" ];
                 after = [ "network-online.target" ];
                 script = ''
                   export PATH=/run/current-system/sw/bin:$PATH
