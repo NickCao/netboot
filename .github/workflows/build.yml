@@ -15,11 +15,10 @@ jobs:
         sed -e "s|^kernel bzImage|kernel https://github.com/NickCao/netboot/releases/download/latest/bzImage|" \
             -e "s|^initrd initrd|initrd https://github.com/NickCao/netboot/releases/download/latest/initrd|" \
             -i artifact/ipxe
-    - uses: marvinpinto/action-automatic-releases@latest
+    - uses: softprops/action-gh-release@v2
       with:
-        repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        automatic_release_tag: "latest"
         prerelease: true
+        tag_name: latest
         files: |
           artifact/ipxe
           artifact/initrd
