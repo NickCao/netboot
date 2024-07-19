@@ -11,15 +11,11 @@ jobs:
     - uses: DeterminateSystems/magic-nix-cache-action@v7
     - run: |
         nix build -vL
-        cp -Lr --no-preserve=all result artifact
-        sed -e "s|^kernel bzImage|kernel https://github.com/NickCao/netboot/releases/download/latest/bzImage|" \
-            -e "s|^initrd initrd|initrd https://github.com/NickCao/netboot/releases/download/latest/initrd|" \
-            -i artifact/ipxe
     - uses: softprops/action-gh-release@v2
       with:
         prerelease: true
         tag_name: latest
         files: |
-          artifact/ipxe
-          artifact/initrd
-          artifact/bzImage
+          result/ipxe
+          result/initrd
+          result/bzImage
