@@ -10,7 +10,7 @@ jobs:
     - uses: DeterminateSystems/nix-installer-action@v4
     - uses: DeterminateSystems/magic-nix-cache-action@v1
     - run: |
-        nix build -vL .#hydraJobs.netboot
+        nix build -vL
         cp -Lr --no-preserve=all result artifact
         sed -e "s|^kernel bzImage|kernel https://github.com/NickCao/netboot/releases/download/latest/bzImage|" \
             -e "s|^initrd initrd|initrd https://github.com/NickCao/netboot/releases/download/latest/initrd|" \
