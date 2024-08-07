@@ -76,7 +76,7 @@
                   setFlakeRegistry = false;
                 };
 
-                system.stateVersion = "23.05";
+                system.stateVersion = lib.trivial.release;
               }
             )
           ];
