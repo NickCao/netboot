@@ -15,11 +15,7 @@ jobs:
         sed -e "s|^kernel bzImage|kernel https://github.com/NickCao/netboot/releases/download/latest/bzImage|" \
             -e "s|^initrd initrd|initrd https://github.com/NickCao/netboot/releases/download/latest/initrd|" \
             -i artifact/ipxe
-    - uses: softprops/action-gh-release@v2
+    - uses: actions/upload-pages-artifact
       with:
-        prerelease: true
-        tag_name: latest
-        files: |
-          artifact/ipxe
-          artifact/initrd
-          artifact/bzImage
+        path: artifact
+    - uses: actions/deploy-pages@v4
