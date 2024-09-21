@@ -13,6 +13,7 @@ jobs:
     - run: |
         nix build -vL
         cp -Lr --no-preserve=all result artifact
+        ln -sr artifact/{index.html,ipxe}
     - uses: actions/upload-pages-artifact@v3
       with:
         path: artifact
