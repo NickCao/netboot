@@ -13,9 +13,6 @@ jobs:
     - run: |
         nix build -vL
         cp -Lr --no-preserve=all result artifact
-        sed -e "s|^kernel bzImage|kernel https://github.com/NickCao/netboot/releases/download/latest/bzImage|" \
-            -e "s|^initrd initrd|initrd https://github.com/NickCao/netboot/releases/download/latest/initrd|" \
-            -i artifact/ipxe
     - uses: actions/upload-pages-artifact@v3
       with:
         path: artifact
