@@ -1,14 +1,14 @@
 name: build
 on: [ push ]
 permissions:
-  contents: write
+  id-token: write
 jobs:
   netboot:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - uses: DeterminateSystems/nix-installer-action@v12
-    - uses: DeterminateSystems/magic-nix-cache-action@v7
+    - uses: DeterminateSystems/nix-installer-action@v14
+    - uses: DeterminateSystems/magic-nix-cache-action@v8
     - run: |
         nix build -vL
         cp -Lr --no-preserve=all result artifact
