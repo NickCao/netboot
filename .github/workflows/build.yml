@@ -24,7 +24,8 @@ jobs:
         chain result/ipxe
         EOF
 
-        systemd-run --user --wait --same-dir --collect --property=RuntimeMaxSec=120 \
+        systemd-run --user --wait --same-dir --collect \
+          --property=MemoryAccounting=yes --property=RuntimeMaxSec=120 \
           qemu-system-x86_64 -M q35 -enable-kvm -cpu host -smp 2 -m 2G \
           -boot order=n -nic user,tftp=.,bootfile=bootfile -display none
     - uses: actions/upload-pages-artifact@v3
