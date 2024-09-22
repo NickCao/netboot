@@ -5,7 +5,7 @@ permissions:
   pages: write
 jobs:
   netboot:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
     - uses: actions/checkout@v4
     - uses: DeterminateSystems/nix-installer-action@v14
@@ -25,7 +25,7 @@ jobs:
         EOF
 
         systemd-run --user --unit=netboot-test --wait --same-dir --remain-after-exit \
-          --property=MemoryAccounting=yes --property=RuntimeMaxSec=120 \
+          --property=RuntimeMaxSec=120 \
           qemu-system-x86_64 -M q35 -enable-kvm -cpu host -smp 2 -m 2G \
           -boot order=n -nic user,tftp=.,bootfile=bootfile -display none
 
