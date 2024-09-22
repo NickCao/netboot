@@ -14,6 +14,19 @@ jobs:
         nix build -vL
         cp -Lr --no-preserve=all result artifact
         ln -sr artifact/{ipxe,index.html}
+    - run: |
+        apt-get install -y qemu-kvm
+
+        cat <<EOF > bootfile
+        #!ipxe
+        # shutdown now
+        set cmdline script="https://httpbin.org/base64/c2h1dGRvd24gbm93Cg=="
+        chain result/ipxe
+        EOF
+
+        systemd-run --user --wait --same-dir --collect --property=RuntimeMaxSec=120 \
+          qemu-system-x86_64 -M q35 -enable-kvm -cpu host -smp 2 -m 2G \
+          -boot order=n -nic user,tftp=.,bootfile=bootfile -display none
     - uses: actions/upload-pages-artifact@v3
       with:
         path: artifact
