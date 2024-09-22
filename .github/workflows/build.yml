@@ -15,7 +15,7 @@ jobs:
         cp -Lr --no-preserve=all result artifact
         ln -sr artifact/{ipxe,index.html}
     - run: |
-        apt-get install -y qemu-kvm
+        sudo apt-get install -y qemu-kvm
 
         cat <<EOF > bootfile
         #!ipxe
