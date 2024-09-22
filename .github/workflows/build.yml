@@ -24,7 +24,7 @@ jobs:
         chain result/ipxe
         EOF
 
-        systemd-run --user --wait --same-dir --collect \
+        sudo systemd-run --wait --same-dir --collect \
           --property=MemoryAccounting=yes --property=RuntimeMaxSec=120 \
           qemu-system-x86_64 -M q35 -enable-kvm -cpu host -smp 2 -m 2G \
           -boot order=n -nic user,tftp=.,bootfile=bootfile -display none 2>&1 | tee $GITHUB_STEP_SUMMARY
