@@ -24,10 +24,12 @@ jobs:
         chain result/ipxe
         EOF
 
-        systemd-run --user --wait --same-dir --collect \
+        systemd-run --user --unit=netboot-test --wait --same-dir --remain-after-exit \
           --property=MemoryAccounting=yes --property=RuntimeMaxSec=120 \
           qemu-system-x86_64 -M q35 -enable-kvm -cpu host -smp 2 -m 2G \
           -boot order=n -nic user,tftp=.,bootfile=bootfile -display none
+
+        echo "::notice title=status::$(systemctl status --user netboot-test)"
     - uses: actions/upload-pages-artifact@v3
       with:
         path: artifact
