@@ -28,6 +28,11 @@
                   (modulesPath + "/installer/netboot/netboot.nix")
                 ];
 
+                systemd.services.nix-daemon.serviceConfig = {
+                  MemoryHigh = "250M";
+                  MemoryMax = "300M";
+                };
+
                 boot = {
                   kernelPackages = pkgs.linuxPackages_latest;
                   initrd.systemd.enable = true;
