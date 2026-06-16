@@ -19,7 +19,7 @@
               }:
               let
                 build = config.system.build;
-                kernelTarget = pkgs.stdenv.hostPlatform.linux-kernel.target;
+                kernelTarget = config.boot.kernelPackages.kernel.target;
               in
               {
                 imports = [
