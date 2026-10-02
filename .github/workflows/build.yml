@@ -15,7 +15,7 @@ jobs:
         ln -sr artifact/{ipxe,index.html}
     - run: |
         sudo apt-get update
-        sudo apt-get install -y qemu-kvm
+        sudo apt-get install -y qemu-system-x86-hwe
 
         cat <<EOF > bootfile
         #!ipxe
