@@ -7,8 +7,8 @@ jobs:
   netboot:
     runs-on: ubuntu-26.04
     steps:
-    - uses: actions/checkout@v4
-    - uses: DeterminateSystems/nix-installer-action@v14
+    - uses: actions/checkout@v7
+    - uses: DeterminateSystems/nix-installer-action@v23
     - run: |
         nix build -vL
         cp -Lr --no-preserve=all result artifact
@@ -28,7 +28,7 @@ jobs:
           --property=MemoryAccounting=yes --property=RuntimeMaxSec=120 \
           qemu-system-x86_64 -M q35 -enable-kvm -cpu host -smp 2 -m 2G \
           -boot order=n -nic user,tftp=.,bootfile=bootfile -display none 2>&1 | tee $GITHUB_STEP_SUMMARY
-    - uses: actions/upload-pages-artifact@v3
+    - uses: actions/upload-pages-artifact@v5
       with:
         path: artifact
-    - uses: actions/deploy-pages@v4
+    - uses: actions/deploy-pages@v5
