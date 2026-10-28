@@ -8,7 +8,10 @@ jobs:
     runs-on: ubuntu-26.04
     steps:
     - uses: actions/checkout@v7
-    - uses: DeterminateSystems/nix-installer-action@v23
+    - uses: NixOS/nix-installer-action@main
+      with:
+        extra-conf: |
+          experimental-features = nix-command flakes
     - run: |
         nix build -vL
         cp -Lr --no-preserve=all result artifact
