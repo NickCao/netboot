@@ -35,7 +35,6 @@
 
                 boot = {
                   kernelPackages = pkgs.linuxPackages_latest;
-                  initrd.systemd.enable = true;
                 };
 
                 networking.useNetworkd = true;
